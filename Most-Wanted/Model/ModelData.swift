@@ -4,7 +4,7 @@
 
 import Foundation
 
-var persons: [Person] = load(filename: "Resources/mostWanted.json")
+var facts: [Fact] = load(filename: "wanted.json")
 
 func load<T: Decodable>(filename: String) -> T {
     let data: Data
