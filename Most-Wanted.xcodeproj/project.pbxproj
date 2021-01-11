@@ -78,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B4A001A25AC5B59009553FD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3B4AFFEF25AC4EC0009553FD /* Person.swift */,
+				3B4A000725AC5633009553FD /* ModelData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3B4AFFAC25AC4210009553FD = {
 			isa = PBXGroup;
 			children = (
@@ -101,10 +110,9 @@
 		3B4AFFB725AC4210009553FD /* Most-Wanted */ = {
 			isa = PBXGroup;
 			children = (
+				3B4A001A25AC5B59009553FD /* Model */,
 				3B4AFFEE25AC4E3A009553FD /* Resources */,
 				3B4AFFB825AC4210009553FD /* Most_WantedApp.swift */,
-				3B4AFFEF25AC4EC0009553FD /* Person.swift */,
-				3B4A000725AC5633009553FD /* ModelData.swift */,
 				3B4AFFBA25AC4210009553FD /* ContentView.swift */,
 				3B4AFFBC25AC4213009553FD /* Assets.xcassets */,
 				3B4AFFC125AC4213009553FD /* Info.plist */,
