@@ -6,14 +6,35 @@ import SwiftUI
 
 struct WantedRow: View {
     var fact: Fact
+    @State var image: UIImage?
+    
+    func loadImage(url: String?) {
+        guard let url = url else {
+            return
+        }
+        
+        guard let parsedUrl = URL(string: url) else {
+            return
+        }
+        
+        guard let data = try? Data(contentsOf: parsedUrl) else {
+            return
+        }
+        
+        image = UIImage(data: data)
+    }
     
     var body: some View {
         HStack {
-            Text(fact.images[0].thumb ?? "no image")
+            if let image = image {
+                Image(uiImage: image)
+            }
             Text(fact.title ?? "untitled")
             
             Spacer()
-        }
+        }.onAppear(perform: {
+            loadImage(url: fact.images[0].thumb)
+        })
     }
 }
 
