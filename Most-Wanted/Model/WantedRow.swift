@@ -8,19 +8,9 @@ struct WantedRow: View {
     var fact: Fact
     @State var image: UIImage?
     
-    func loadImage(url: String?) {
-        guard let url = url else {
-            return
-        }
-        
-        guard let parsedUrl = URL(string: url) else {
-            return
-        }
-        
-        guard let data = try? Data(contentsOf: parsedUrl) else {
-            return
-        }
-        
+    private func loadImage(url: URL?) {
+        guard let url = url else { return }
+        guard let data = try? Data(contentsOf: url) else { return }
         image = UIImage(data: data)
     }
     
@@ -28,12 +18,18 @@ struct WantedRow: View {
         HStack {
             if let image = image {
                 Image(uiImage: image)
+            } else {
+                Text("missing image")
             }
             Text(fact.title ?? "untitled")
             
             Spacer()
         }.onAppear(perform: {
-            loadImage(url: fact.images[0].thumb)
+            if let it = fact.images[0].thumb {
+                loadImage(url: URL(string: it))
+            } else {
+                loadImage(url: Bundle.main.url(forResource: "unknown", withExtension: "png"))
+            }
         })
     }
 }
