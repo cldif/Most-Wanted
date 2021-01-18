@@ -36,6 +36,7 @@ struct WantedRow: View {
 
 struct WantedRow_Previews: PreviewProvider {
     static var previews: some View {
-        WantedRow(fact: facts[0])
+        let factFetcher = FactFetcher(url: "https://api.fbi.gov/wanted/v1/list")
+        WantedRow(fact: factFetcher.facts[0])
     }
 }

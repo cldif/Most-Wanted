@@ -4,26 +4,25 @@
 
 import Foundation
 
-var facts: [Fact] = load(filename: "wanted.json")
+class FactFetcher : ObservableObject {
+    @Published var facts: [Fact] = []
 
-func load<T: Decodable>(filename: String) -> T {
-    let data: Data
-    
-    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-    else {
-        fatalError("Couldn't find \(filename) in main bundle.")
-    }
-    
-    do {
-        data = try Data(contentsOf: file)
-    } catch {
-        fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
-    }
-    
-    do {
-        let decoder = JSONDecoder()
-        return try decoder.decode(T.self, from: data)
-    } catch {
-        fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
+    init(url: String) {
+        let data: Data
+        
+        guard let url  = URL(string: url) else { return }
+        
+        do {
+            data = try Data(contentsOf: url)
+        } catch {
+            fatalError("Couldn't load the JSON located at the url: \(url):\n\(error)")
+        }
+        
+        do {
+            let decoder = JSONDecoder()
+            facts = try decoder.decode([Fact].self, from: data)
+        } catch {
+            fatalError("Couldn't parse the JSON as \(Fact.self):\n\(error)")
+        }
     }
 }
